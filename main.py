@@ -50,17 +50,24 @@ class Universe(object):
 					print len(cmd)
 			if cmd[0] == "START":
 				self.START()
+			elif cmd[0] == "HELP":
+				self.HELP()
 			elif cmd[0] == "GOTO":
-					self.GOTO(cmd)	
+				self.GOTO(cmd)	
 			elif cmd[0] == "BATTLEVEL":
 				print "%s%s" % (self.batLevel, "%")
 			elif cmd[0] == "SHUTDOWN":
 				self.SHUTDOWN()
+			elif cmd[0] == "PLANETCHOICE":
+				self.PLANETCHOICE()
 			elif cmd[0] == "PLANETPROPS":
 				self.getPlanetProperties(self.currentPlanet)
+			elif cmd[0] == "EXITGAME":
+				self.EXITGAME()
 			else:
 				if self.exit == "False":
-					print "\033[31mCOMMAND NOT VALID\033[0m"
+					print "\033[31mCOMMAND NOT VALID"
+					print "try typing HELP\033[0m"
 					exitRetries = exitRetries - 1
 					if exitRetries <= -5:
 						print "\033[1;31mSHUTTING DOWN\033[0m"
@@ -81,6 +88,9 @@ class Universe(object):
                         self.currentPlanet = "Ala"
                         thread.start_new_thread(self.battIncrease,(),)
 			thread.start_new_thread(self.useO2,(),)
+
+	def HELP(self):
+		print "\033[0;34mOPTIONS:\nSTART\nHELP\nGOTO\nBATTLELEVEL\nSHUTDOWN\nPLANETPROPS\nEXITGAME\033[0m"
 
 	def GOTO(self, cmd):
         	if self.shipStarted == "True":
@@ -119,6 +129,11 @@ class Universe(object):
 			while self.batLevel <= 100:
 				self.batLevel = self.batLevel + 1
 				time.sleep(60)
+	
+	def PLANETCHOICE(self):
+		print "\033[0;32mPLANETS:\033[0m"
+		for i in self.planets:
+			print "\033[0;32m" + i + "\033[0m"
 
 	def getPlanetProperties(self, planet):
 		try:
@@ -136,6 +151,9 @@ class Universe(object):
 			self.exit = "True"
 		else:
 			print "\033[0;31mSYSTEM NOT STARTED; NO SHUTDOWN\033[0m"
+
+	def EXITGAME(self):
+		return 1 #TODO exit gracefully?
 				
 	def useO2(self):
 		while self.exit == "False":

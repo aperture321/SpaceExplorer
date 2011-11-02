@@ -62,8 +62,6 @@ class Universe(object):
 				self.PLANETCHOICE()
 			elif cmd[0] == "PLANETPROPS":
 				self.getPlanetProperties(self.currentPlanet)
-			elif cmd[0] == "EXITGAME":
-				self.EXITGAME()
 			else:
 				if self.exit == "False":
 					print "\033[31mCOMMAND NOT VALID"
@@ -90,7 +88,7 @@ class Universe(object):
 			thread.start_new_thread(self.useO2,(),)
 
 	def HELP(self):
-		print "\033[0;34mOPTIONS:\nSTART\nHELP\nGOTO\nBATTLELEVEL\nSHUTDOWN\nPLANETPROPS\nEXITGAME\033[0m"
+		print "\033[0;34mOPTIONS:\nSTART\nHELP\nGOTO\nBATTLEVEL\nPLANETCHOICE\nSHUTDOWN\nPLANETPROPS\n\033[0m"
 
 	def GOTO(self, cmd):
         	if self.shipStarted == "True":
@@ -152,9 +150,6 @@ class Universe(object):
 		else:
 			print "\033[0;31mSYSTEM NOT STARTED; NO SHUTDOWN\033[0m"
 
-	def EXITGAME(self):
-		return 1 #TODO exit gracefully?
-				
 	def useO2(self):
 		while self.exit == "False":
 			if self.lifesupport_started == "False":

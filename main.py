@@ -1,13 +1,13 @@
 #! /usr/bin/env python
-"""SpaceExplorer v1.0"""
-#Standard imports.
+"""SpaceExplorer v1.1"""
+#Standard imports. #TODO cleanup imports
 import sys
 import os
 import time
 import thread
 
 #Planets imports
-import planet
+import planet #TODO necessary?
 import planet.PlanetAla
 import planet.PlanetIt
 import planet.PlanetGivera
@@ -38,7 +38,7 @@ class Universe(object):
 	def mprint(self):
 		exitRetries = 0 # defines
 		while self.exit == "False":
-			planets = "Ala", "Givera"
+			planets = "Ala", "Givera" #TODO deprecated? Planets no longer used...?
 			if self.startedUp != "True":
 				#print "\033[34mThis is blue\033[0m" - Color test
 				print "\033[31mGMS-OPPERTUNITY - MAINFRAME\033[0m"
@@ -66,7 +66,7 @@ class Universe(object):
 				if self.exit == "False":
 					print "\033[31mCOMMAND NOT VALID"
 					print "try typing HELP\033[0m"
-					exitRetries = exitRetries - 1
+					exitRetries -= 1
 					if exitRetries <= -5:
 						print "\033[1;31mSHUTTING DOWN\033[0m"
 						self.exit = "True"
@@ -83,7 +83,7 @@ class Universe(object):
                         self.batLevel = self.batLevel - (self.batLevel - (self.batLevel / 2))
                         print "\033[0;34mBATTLEVEL IS NOW %s%s\033[0m" % (self.batLevel, "%")
                         self.shipStarted = "True"
-                        self.currentPlanet = "Ala"
+                        self.currentPlanet = "Ala" #TODO create Ala planet to go back to?
                         thread.start_new_thread(self.battIncrease,(),)
 			thread.start_new_thread(self.useO2,(),)
 
@@ -160,7 +160,7 @@ class Universe(object):
 				return False
 			time.sleep(1)
 			self.lifesupport_started = "True"
-			lifeSupport_O2Level = (lifeSupport_O2Level - 1)
+			lifeSupport_O2Level -= 1
 			print lifeSupport_O2Level
 
 universe = Universe()
